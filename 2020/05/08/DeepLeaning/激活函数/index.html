@@ -1,0 +1,315 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>激活函数 | Ash's blog</title><meta name="keywords" content="深度学习"><meta name="author" content="安河桥北以北"><meta name="copyright" content="安河桥北以北"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="Activation function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="激活函数">
+<meta property="og:url" content="http://example.com/2020/05/08/DeepLeaning/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="Ash&#39;s blog">
+<meta property="og:description" content="Activation function">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/robomaster/robomaster10.jpg">
+<meta property="article:published_time" content="2020-05-08T08:24:24.000Z">
+<meta property="article:modified_time" content="2020-05-08T16:02:23.589Z">
+<meta property="article:author" content="安河桥北以北">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/robomaster/robomaster10.jpg"><link rel="shortcut icon" href="/img/icon_32x32.png"><link rel="canonical" href="http://example.com/2020/05/08/DeepLeaning/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '激活函数',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-05-09 00:02:23'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://gitee.com/bao_xian_hong/Album/raw/master/image/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-comment"></i><span> 碎碎心语</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2021/06/09/%E7%94%9F%E6%B4%BB/2021-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2021记</span></a></li><li><a class="site-page child" href="/2020/01/01/%E7%94%9F%E6%B4%BB/2020-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2020记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 生活</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/robomaster/robomaster10.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ash's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-comment"></i><span> 碎碎心语</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2021/06/09/%E7%94%9F%E6%B4%BB/2021-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2021记</span></a></li><li><a class="site-page child" href="/2020/01/01/%E7%94%9F%E6%B4%BB/2020-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2020记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 生活</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">激活函数</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-08T08:24:24.000Z" title="发表于 2020-05-08 16:24:24">2020-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-08T16:02:23.589Z" title="更新于 2020-05-09 00:02:23">2020-05-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="激活函数"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>生物的神经网络激发了前人对人工神经网络的发展。激活函数（Activation function）是神经网络中一个至关重要的部分。</p>
+<p>激活函数的存在是神经网络中用来添加非线性因素的，提升模型拟合的能力，如果没有激活函数，那么这个神经网络再深，也没办法去拟合任意函数。</p>
+<p>所以我们使用的激活函数通常都是非线性的，因为如果使用线性的那么使用激活函数就没什么意义了。</p>
+<p>神经网络用于实现复杂的函数，非线性激活函数可以使神经网络随意逼近复杂函数。没有激活函数带来的非线性，多层神经网络和单层无异。</p>
+<p>神经网络单个神经元的基本结构由线性输出 Z 和非线性输出 A 两部分组成。如下图所示：</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数1.png" alt=""></p>
+<h1 id="非线性激活函数"><a href="#非线性激活函数" class="headerlink" title="非线性激活函数"></a>非线性激活函数</h1><p>非线性激活函数有很多，是最常用的激活函数类型，非线性方程控制输入到输出映射。</p>
+<p>非线性激活函数有：Sigmoid、Tanh、ReLU、Leaky ReLU、ELU、Maxout、PReLU、Swish、GELU等等等</p>
+<p>本文只介绍几种常见的Sigmoid、Tanh、ReLU、Leaky ReLU和Parametric ReLU</p>
+<h2 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h2><p>Sigmoid又叫作 Logistic 激活函数，函数的取值范围在 (0,1) 之间，单调连续，求导容易，一般用于二分类神经网络的输出层。该函数将大的负数转换成 0，将大的正数转换成 1。数学公式为：</p>
+<script type="math/tex; mode=display">\ \sigma(x) =\frac{1}{1+e^{-x}}</script><p>函数图像：</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/sigmoid.png" alt=""></p>
+<p>这里主要谈谈Sigmoid函数的缺陷：</p>
+<ul>
+<li>梯度消失：Sigmoid 函数趋近 0 和 1 的时候变化率会变得平坦，也就是说，Sigmoid 的梯度趋近于 0。神经网络使用 Sigmoid 激活函数进行反向传播时，输出接近 0 或 1 的神经元其梯度趋近于 0。这些神经元叫作饱和神经元。因此，这些神经元的权重不会更新。此外，与此类神经元相连的神经元的权重也更新得很慢。该问题叫作梯度消失。因此，想象一下，如果一个大型神经网络包含 Sigmoid 神经元，而其中很多个都处于饱和状态，那么该网络无法执行反向传播。</li>
+</ul>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数2.png" alt=""></p>
+<hr>
+<p>这里简单说一下梯度消失的问题</p>
+<p>首先，再BP神经网络中，我们知道，我们想要更新一个特定的权重，更新规则为：</p>
+<script type="math/tex; mode=display">\ w_{new} = w_{old} - \mu \frac{\partial J_{total}}{\partial w_{old}}</script><p>但是如果我们的<script type="math/tex">\ \frac{\partial J_{total}}{\partial w_{old}}</script>过小，非常小，这时我们就遇到了梯度消失问题，其中许多权重和偏置只能收到非常小的更新。</p>
+<p>我们假如<script type="math/tex">\ w_{old}</script>为0.2，最后更新到<script type="math/tex">\ w_{new}</script>为0.19999999999显然这个更新毫无意义，梯度很小，如同消失了一样，使得神经网络中的权重几乎没有更新。这会导致网络中的节点离其最优值相去甚远。</p>
+<p>这个问题会严重妨碍神经网络的学习。</p>
+<hr>
+<ul>
+<li>不以零为中心：Sigmoid 输出不以零为中心的。</li>
+</ul>
+<hr>
+<p>这里也是有学问的，假如Sigmoid函数输出为<script type="math/tex">\ \sigma(Wx+b)</script> 且满足<script type="math/tex">\ 0<\sigma (Wx+b) <1</script></p>
+<p>在反向求导的过程中，令损失函数<script type="math/tex">\ J</script>对<script type="math/tex">\sigma (Wx+b)</script> 的求导为 <script type="math/tex">\ \sigma</script> ，计算<script type="math/tex">\ J</script>对<script type="math/tex">\ W</script>的偏导数：</p>
+<script type="math/tex; mode=display">\ dW = d\sigma \cdot \frac{d}{dW}(\sigma(Wx+b)) = d\sigma \cdot \sigma(Wx+b)(1-\sigma(Wx+b))\cdot x</script><p>其中，<script type="math/tex">\ \sigma(Wx+b)>0, 1-\sigma(Wx+b)>0</script></p>
+<p>若神经元的输入 <script type="math/tex">\ x>0</script>，则无论 <script type="math/tex">\ d\sigma</script> 正负如何，总能得到 <script type="math/tex">\ dW</script> 恒为正或者恒为负。也就是说参数矩阵 <script type="math/tex">\ W</script> 的每个元素都会朝着同一个方向变化，同为正或同为负。这对于神经网络训练是不利的，所有的 <script type="math/tex">\ W</script> 都朝着同一符号方向变化会减小训练速度，增加模型训练时间。就好比我们下楼梯的所需的时间总比直接滑梯下来的时间要长得多，如下图所示：</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数3.png" alt=""></p>
+<p>图中，红色折线是上文讨论的情况，蓝色斜线是 W 不全朝同一方向变化的情况。</p>
+<p>值得一提的是，针对Sigmoid函数的这一问题，神经元的输入<script type="math/tex">\ x</script>常会做预处理，即将均值归一化到零值。这样也能有效避免<script type="math/tex">\ dW</script>恒为正或者恒为负。</p>
+<hr>
+<ul>
+<li>计算成本高昂：exp()函数与其他非线性激活函数相比，计算成本高昂。</li>
+</ul>
+<h2 id="Tanh"><a href="#Tanh" class="headerlink" title="Tanh"></a>Tanh</h2><p>公式为：</p>
+<script type="math/tex; mode=display">\ \frac {e^{x}-e^{-x}}{e^{x}+e^{-x}}</script><p>函数图像为：</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数4.png" alt=""></p>
+<p>Tanh 激活函数又叫作双曲正切激活函数（hyperbolic tangent activation function）。与 Sigmoid 函数类似，Tanh 函数也使用真值，但 Tanh 函数将其压缩至-1 到 1 的区间内。与 Sigmoid 不同，Tanh 函数的输出以零为中心，因为区间在-1 到 1 之间。你可以将 Tanh 函数想象成两个 Sigmoid 函数放在一起。在实践中，Tanh 函数的使用优先性高于 Sigmoid 函数。负数输入被当作负值，零输入值的映射接近零，正数输入被当作正值。唯一的缺点是：</p>
+<ul>
+<li>Tanh 函数也会有梯度消失的问题，因此在饱和时也会“杀死”梯度。</li>
+</ul>
+<h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><p>ReLU函数代表的的是“修正线性单元”，它是带有卷积图像的输入x的最大函数(x,o)。ReLU函数将矩阵x内所有负值都设为零，其余的值不变。</p>
+<p>它的数学公式为：</p>
+<script type="math/tex; mode=display">\ f(x) = max(0,x)</script><p>函数图像为</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数5.png" alt=""></p>
+<p>ReLU是最常用的一个激活函数，它没有饱和区，不存在梯度消失问题，没有复杂的指数运算，计算简单、效率提高，实际收敛速度较快，大约是 Sigmoid/tanh 的6倍，比 Sigmoid 更符合生物学神经激活机制。</p>
+<p>但是ReLU函数也有一些缺陷：</p>
+<ul>
+<li><p>不以零为中心：和 Sigmoid 激活函数类似，ReLU 函数的输出不以零为中心。</p>
+</li>
+<li><p>前向传导过程中，如果 x &lt; 0，则神经元保持非激活状态，且在后向传导中“杀死”梯度，导致神经元“死亡”。这样权重无法得到更新，网络无法学习。当 x = 0 时，该点的梯度未定义，但是这个问题在实现中得到了解决，通过采用左侧或右侧的梯度的方式。</p>
+</li>
+</ul>
+<hr>
+<p>关于神经元“死亡”</p>
+<p>用一个简单的神经网络举个例子</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数6.png" alt=""></p>
+<p>对于这个神经网络，<script type="math/tex">\ W</script>为2x4的矩阵，单个训练样本<script type="math/tex">\ x</script>为4x1的向量</p>
+<p>所以：</p>
+<script type="math/tex; mode=display">\ z_1 = \left [ W_{11} \quad W_{21} \quad W_{31} \quad W_{41} \right ]\cdot\begin{bmatrix}x_{1}\\x_{2}\\x_{3}\\x_{4}\end{bmatrix}</script><p>假设这个时候<script type="math/tex">\ W</script>坏掉了，对所有的训练样本<script type="math/tex">\ \vec{x}</script>，输出的这个<script type="math/tex">\ Z_1</script>始终是小于0的数，那么：</p>
+<script type="math/tex; mode=display">\ a_1 = ReLU(z_1) = max(z_1,0) = 0</script><p>所以激活函数的输出值永远都是0，回到反向传播：</p>
+<script type="math/tex; mode=display">\ \frac{\partial J}{\partial z_1} = \frac{\partial J}{\partial a_1}\frac{\partial a_1}{\partial z_1}</script><p>其中，由于<script type="math/tex">\ z_1<0</script>时，<script type="math/tex">\ a_1 = 0</script> 。所有<script type="math/tex">\ \frac{\partial a_1}{\partial z_1} = 0</script>恒成立</p>
+<p>所以：</p>
+<script type="math/tex; mode=display">\ \frac{\partial J}{\partial z_1} = \frac{\partial J}{\partial a_1}\frac{\partial a_1}{\partial z_1} = \frac{\partial J}{\partial a_1}\cdot 0 = 0</script><p>所以：</p>
+<script type="math/tex; mode=display">\ \frac{\partial J}{\partial W} = \frac{\partial J}{\partial z_1}\cdot x^T</script><p>所以<script type="math/tex">\ \frac{\partial L}{\partial W} = \vec{0}^T</script>恒成立</p>
+<hr>
+<h2 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky ReLU"></a>Leaky ReLU</h2><p>公式：</p>
+<script type="math/tex; mode=display">\ max(0.1x,x)</script><p>函数图像：</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数7.png" alt=""></p>
+<p>Leaky ReLU 的概念是：</p>
+<p>当<script type="math/tex">\ x < 0</script>时，它得到0.1的正梯度。该函数一定程度上缓解了ReLU中的死亡神经元的问题，但是使用该函数的结果并不连贯。它具备ReLU激活函数的所有特征，如计算高效、快速收敛、在正区域内不会饱和。</p>
+<h2 id="Parametric-ReLU"><a href="#Parametric-ReLU" class="headerlink" title="Parametric ReLU"></a>Parametric ReLU</h2><p>PReLU 函数的数学公式为：</p>
+<script type="math/tex; mode=display">\ f(x) = max(\alpha x,x)</script><p>其中<script type="math/tex">\ \alpha</script>是超参数。这里引入了一个随机的超参数，它可以被学习，因为你可以对它进行反向传播。这使神经元能够选择负区域最好的梯度，有了这种能力，它们可以变成 ReLU 或 Leaky ReLU。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">安河桥北以北</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/05/08/DeepLeaning/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/">http://example.com/2020/05/08/DeepLeaning/%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Ash's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></div><div class="post_share"><div class="social-share" data-image="/img/robomaster/robomaster10.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/05/10/DeepLeaning/CNN%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><img class="prev-cover" src="/img/robomaster/robomaster11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CNN卷积神经网络</div></div></a></div><div class="next-post pull-right"><a href="/2020/04/26/DeepLeaning/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><img class="next-cover" src="/img/robomaster/robomaster11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BP神经网络</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/02/DeepLeaning/AlexNet/" title="AlexNet"><img class="cover" src="/img/robomaster/robomaster11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="title">AlexNet</div></div></a></div><div><a href="/2020/04/26/DeepLeaning/BP神经网络/" title="BP神经网络"><img class="cover" src="/img/robomaster/robomaster11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-26</div><div class="title">BP神经网络</div></div></a></div><div><a href="/2020/04/23/DeepLeaning/M-P神经元and感知机/" title="M-P神经元and感知机"><img class="cover" src="/img/robomaster/robomaster10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-23</div><div class="title">M-P神经元and感知机</div></div></a></div><div><a href="/2020/05/10/DeepLeaning/CNN卷积神经网络/" title="CNN卷积神经网络"><img class="cover" src="/img/robomaster/robomaster11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-10</div><div class="title">CNN卷积神经网络</div></div></a></div><div><a href="/2020/04/16/DeepLeaning/windows10-tensorflow-gpu/" title="windows10+tensorflow-gpu"><img class="cover" src="/img/robomaster/robomaster10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-16</div><div class="title">windows10+tensorflow-gpu</div></div></a></div><div><a href="/2020/03/29/python/Numpy科学计算库/" title="Numpy科学计算库"><img class="cover" src="/img/robomaster/robomaster10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-29</div><div class="title">Numpy科学计算库</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-text">非线性激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sigmoid"><span class="toc-text">Sigmoid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tanh"><span class="toc-text">Tanh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ReLU"><span class="toc-text">ReLU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Leaky-ReLU"><span class="toc-text">Leaky ReLU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parametric-ReLU"><span class="toc-text">Parametric ReLU</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By 安河桥北以北</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">🌈Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">🌈Butterfly 3.7.8</a></div><a target="_blank" rel="noopener" href="https://console.upyun.com/account/security//"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/又拍云logo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://cloud.tencent.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/logo-bg-color.svg" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://www.aliyun.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/阿里云logo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://tongji.baidu.com/web/welcome/login"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/百度统计logo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://accounts.google.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/ic_analytics.svg" alt=""/></a><span class="footer-separator">Google Analytics |</span><a target="_blank" rel="noopener" href="https://gitee.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/码云logo.svg" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://coding.net/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/codinglogo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://github.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/githublogo.png" alt=""/></a><div class="footer_custom_text">一个新时代躺平青年的博客</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '7WoV0hNly8Wv1UWQxyecO8z7-gzGzoHsz',
+      appKey: 'cj2rXzmTC9dy0QAkIaBfrOXT',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

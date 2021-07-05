@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>M-P神经元and感知机 | Ash's blog</title><meta name="keywords" content="深度学习"><meta name="author" content="安河桥北以北"><meta name="copyright" content="安河桥北以北"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#0d0d0d"><meta name="description" content="M-P神经网络模型和感知机基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="M-P神经元and感知机">
+<meta property="og:url" content="http://example.com/2020/04/23/DeepLeaning/M-P%E7%A5%9E%E7%BB%8F%E5%85%83and%E6%84%9F%E7%9F%A5%E6%9C%BA/index.html">
+<meta property="og:site_name" content="Ash&#39;s blog">
+<meta property="og:description" content="M-P神经网络模型和感知机基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/robomaster/robomaster10.jpg">
+<meta property="article:published_time" content="2020-04-22T17:50:03.000Z">
+<meta property="article:modified_time" content="2020-05-30T20:53:51.648Z">
+<meta property="article:author" content="安河桥北以北">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/robomaster/robomaster10.jpg"><link rel="shortcut icon" href="/img/icon_32x32.png"><link rel="canonical" href="http://example.com/2020/04/23/DeepLeaning/M-P%E7%A5%9E%E7%BB%8F%E5%85%83and%E6%84%9F%E7%9F%A5%E6%9C%BA/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":500},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'M-P神经元and感知机',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2020-05-31 04:53:51'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://gitee.com/bao_xian_hong/Album/raw/master/image/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-comment"></i><span> 碎碎心语</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2021/06/09/%E7%94%9F%E6%B4%BB/2021-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2021记</span></a></li><li><a class="site-page child" href="/2020/01/01/%E7%94%9F%E6%B4%BB/2020-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2020记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 生活</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-user"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/robomaster/robomaster10.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ash's blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-comment"></i><span> 碎碎心语</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2021/06/09/%E7%94%9F%E6%B4%BB/2021-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2021记</span></a></li><li><a class="site-page child" href="/2020/01/01/%E7%94%9F%E6%B4%BB/2020-%E8%AE%B0/"><i class="fa-fw fas fa-pencil-alt"></i><span> 2020记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 生活</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/gallery/"><i class="fa-fw fas fa-photo-video"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-user"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">M-P神经元and感知机</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-22T17:50:03.000Z" title="发表于 2020-04-23 01:50:03">2020-04-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-30T20:53:51.648Z" title="更新于 2020-05-31 04:53:51">2020-05-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="M-P神经元and感知机"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong><font size = 6> M-P神经元模型 </font></strong></p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/MP模型.png" alt=""></p>
+<ul>
+<li><p><script type="math/tex">\ \chi_1 、 \chi_2 、... \chi_n</script>代表传入信号</p>
+</li>
+<li><p><script type="math/tex">\ w_1、w_2...w_n</script>代表权重</p>
+</li>
+</ul>
+<p>大脑🧠神经元的状态：兴奋和抑制 分别利用 1 和 0 来进行表示</p>
+<p>通过这样的二进制的机制来模拟大脑工作</p>
+<p><script type="math/tex">\ w</script>的大小来模拟神经元的重要程度？就是一个权重，好比一个公司的股份，你股份越大你越有话语权的意思</p>
+<p>神经元激活与否取决于阈值(threshold) <script type="math/tex">\theta</script>，只有输入的信息经过处理后超过了阈值<script type="math/tex">\ \theta</script> 才会激活神经元，否则神经元不会输出信号，即：</p>
+<center>$$\ \sum ^n_{i=1}w_ix_i - \theta>0 $$ </center>
+
+<p>这个时候才会被激活 </p>
+<p>而<script type="math/tex">\ y</script>的输出，只有1和0，即兴奋或者是抑制</p>
+<p><strong><font size=5> 激活函数 </font></strong></p>
+<p>常用激活函数分为线性函数和非线性函数</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/激活函数.png" alt=""></p>
+<p>S型的函数在梯度下降的时候会再提</p>
+<p><strong><font size = 5>总结📜🖋</font></strong></p>
+<ul>
+<li><p>每一个神经元都是一个多输入单输出的处理单元</p>
+</li>
+<li><p>神经元的输入分为兴奋（1）和抑制（0）</p>
+</li>
+</ul>
+<p><strong><font size = 6> 感知机 </font></strong></p>
+<p>感知机被称为最简单的神经网络</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/感知机神经网络.png" alt=""></p>
+<p>它是由两层神经元构成的神经网络，即输入层和输出层</p>
+<p>输入层接受外界输入的信息，经过<font color = red>激活函数（含阈值）</font>的变换，最后把信号传送到输出层</p>
+<p>感知机是<font color = red>有监督</font>的学习，所有的<font color = red>有监督</font>学习，在某种程度上都是分类学习算法</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/感知机学习算法.png" alt=""></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">品类</th>
+<th style="text-align:left">颜色(<script type="math/tex">\ x_1</script>)</th>
+<th style="text-align:left">形状(<script type="math/tex">\ x_2</script>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">西瓜</td>
+<td style="text-align:left">1(绿色)</td>
+<td style="text-align:left">1(圆形)</td>
+</tr>
+<tr>
+<td style="text-align:left">香蕉</td>
+<td style="text-align:left">-1(黄色)</td>
+<td style="text-align:left">-1(弯形)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>所以：</p>
+<p>西瓜：<script type="math/tex">\ f = x_1w_1 + x_2w_2 - \theta = 1 * 1 + 1 * 1 - 0 = 2</script>.<br>香蕉：<script type="math/tex">\ f = x_1w_1 + x_2w_2 - \theta = 1 * (-1) + 1 * (-1) - 0 = -2</script>.</p>
+<p>所以由激活函数得到</p>
+<p>2————&gt;1<br>-2————&gt;0</p>
+<p>这样就区分出了西瓜和香蕉</p>
+<p>但是我们这里是默认了<script type="math/tex">\ w_1 和 w_2</script>的值，但是它其实并不都是1，这就是权重，所占的比重大小</p>
+<p>而这个比重，就是经过反复的训练(试错)得出来的比重，比如说区分男生和女生</p>
+<p>头发长短的比重是1，有无喉结所占比重是9，那么头发长度只占有10%的比重，而这个比重是不足以进行下定结论的</p>
+<p>就好比如，一个长头发的男生，他是长头发，但是他由喉结，所以</p>
+<p><script type="math/tex">\ f = w_1x_1 + w_2x_2 -\theta = 1 * (-1) + 9 * 1 = 8 ————> 1</script>.</p>
+<p><strong><font size = 5> 感知机的学习过程 </font></strong></p>
+<p>因为“知错”，就表明它事先有了事物的评判标准，如果它并不是目标物，就会有个<font color = red>偏移量</font>用来纠正</p>
+<font color = red>神经网络的学习规则，就是调整权重和阈值的规则</font>
+
+<p>假设规则是：</p>
+<p><script type="math/tex">\ w_{new} = w_{old} + ep</script>.</p>
+<p><script type="math/tex">\ \theta_{new} = \theta_{old} + ep</script>.</p>
+<p>其中<script type="math/tex">\ ep = y - y'</script>，<script type="math/tex">\ y</script>是期望输出，<script type="math/tex">\ y'</script>是实际输出，所以<script type="math/tex">\ ep</script>实际上就是一个偏移量</p>
+<p>感知机的学习过程就是一个纠偏的过程，把权重纠正到能够满足需求的过程</p>
+<p>比如我们将刚刚的<script type="math/tex">\ w_1 = 1, w_2 = -1</script>，阈值依然为0</p>
+<p>那么，这个时候我们计算西瓜</p>
+<p>西瓜：<script type="math/tex">\ f(西瓜) = x_1w_1 + x_2w_2 - \theta = 1 * 1 + 1 * (-1) - 0 = 0</script>.</p>
+<p>经过激活函数处理0————&gt;0，这个时候已经判断出错了，既然判断为香蕉，感知机知道与原来输入的标签不符，所以进行纠正偏差</p>
+<p>这个时候本应该正确的判定<font color = red>期望输出<script type="math/tex">\ y = 1</script></font>，而<font color = red>实际输出<script type="math/tex">\ y' = 0</script></font>，所以就需要纠正偏差</p>
+<center>$$\ ep = y - y' = 1 - 0 = 1 $$</center>
+
+<p>将<script type="math/tex">\ ep = 1</script>代入：</p>
+<center>$$\ w_{1new} = w_{1old} + ep = 1+1 =2$$</center>
+<center>$$\ w_{2new} = w_{2old} + ep = (-1)+1= 0$$</center>
+<center>$$\ \theta_{new} = \theta_{old} + ep = 0 + 1 = 1$$</center>
+
+<p>经过纠偏以后，再输入西瓜的信息：</p>
+<p><script type="math/tex">\ f(西瓜) = x_1w_1 + x_2w_2-\theta = 1 * 2 +1*0-1=1</script>.</p>
+<p>这样，经过学习以后，就判断正确了</p>
+<p>然后再反复输入西瓜和香蕉，知道<script type="math/tex">\ ep = 0</script>就代表网络已经稳定，学习结束</p>
+<p><strong><font size = 5>感知机训练法则</font></strong></p>
+<p>假设阶跃函数<script type="math/tex">\ y = f(\sum_iw_ix_i-\theta)</script>.</p>
+<p>它即可完成常见的逻辑运算</p>
+<p>1、逻辑“与”运算(<script type="math/tex">\ x_1\wedge x_2</script>)</p>
+<p>令<script type="math/tex">\ w_1=w_2=1, \theta = 2</script>时有：</p>
+<center>$$\ y = f(1*x_1+1*x_2-2)=f(x_1+x_2-2)$$</center>
+
+<p>此时，当且仅当<script type="math/tex">\ x_1=x_2=1</script>时(都为真)，&amp;&amp;\ y = 1&amp;&amp;(为真)，其他情况下都为假，即无论<script type="math/tex">\ x_1</script>还是<script type="math/tex">\ x_2</script>为0，那么<script type="math/tex">\ y = 0</script>恒成立</p>
+<p>这样就完成了逻辑”与”运算</p>
+<p>2、逻辑“或”运算(<script type="math/tex">\ x_1\vee x_2</script>)</p>
+<p>令<script type="math/tex">\ w_1=w_2=1, \theta = 0.5</script>时有：</p>
+<center>$$\ y = f(1*x_1+1*x_2-0.5)=f(x_1+x_2-0.5)$$</center>
+
+<p>此时，当<script type="math/tex">\ x_1</script>或<script type="math/tex">\ x_2</script>中有一个1，那么就为真，即&amp;&amp;\ y = 1&amp;&amp;，<script type="math/tex">\ x_1</script>和<script type="math/tex">\ x_2</script>都为0时，就为假</p>
+<p>3、逻辑“非”运算</p>
+<p>令<script type="math/tex">\ w_1=0.6 w_2=0, \theta = 0.5</script>时有：</p>
+<center>$$\ y = f((-0.6)*x_1+0*x_2-0.5)=f((-0.6)*x_1-0.5)$$</center>
+
+<p>这时，当<script type="math/tex">\ x_1=1</script>时，<script type="math/tex">\ y = 0</script>，反之则相反</p>
+<blockquote>
+<p>但是它莫有办法实现“异或”逻辑运算</p>
+</blockquote>
+<hr>
+<p>一般的，我们给定大量的数据，神经网络的<script type="math/tex">\ w_i</script>和<script type="math/tex">\ \theta</script>都可以通过纠偏学习得到</p>
+<p>感知机的学习规则可以更加简单</p>
+<p>对于训练样本<script type="math/tex">\ (x, y)</script>，若当前感知机的实际输出<script type="math/tex">\ y'</script>，假设不符合预期，存在偏差，那么感知机的权重规则调整为：</p>
+<font color = red>
+<center>$$\ w_{inew} \leftarrow w_{iold} + \Delta w_i $$</center>
+<center>$$\ \Delta w_i \leftarrow \eta (y'-y)x_i$$</center>
+</font>
+
+<p>其中，<font color = red><script type="math/tex">\ \eta \in (0,1)</script></font>称为<font color = red>学习率(learning_rate)</font></p>
+<p>注意：<br>学习率η的作用是“缓和”每一步权值调整强度的，它本身的大小，也是比较难以确定的。<br>如果<script type="math/tex">\ \eta</script>太小，网络调参的次数就太多，从而收敛很慢。<br>如果<script type="math/tex">\ \eta</script>太大，从而错过了网络的参数的最优解。<br>因此，合适的<script type="math/tex">\ \eta</script>大小，在某种程度上，还依赖于人工经验（即属于超参数范畴）。通常，将<script type="math/tex">\ \eta</script>的初始设置为一个较小的值（如0.1）</p>
+<p><strong><font size = 5>多层感知机</font></strong></p>
+<p>简单的两层神经网络的感知机没办法完成“异或”的逻辑运算</p>
+<p>因为复杂的逻辑运算，单单两层的感知机是没办法完成的，那就来多层</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/多层感知机.png" alt=""></p>
+<p>再输入层和输出层之间的我们称为<font color = red>隐含层</font></p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/隐含层.png" alt=""></p>
+<p>在我们刚刚的人工神经网络中添加一层隐含层</p>
+<p>令<script type="math/tex">\ x_1=x_2=1</script>，并且<script type="math/tex">\ x_1</script>对隐含层节点1和2的权重分别为<script type="math/tex">\ w_1 = 1, w_2=-1</script>，<script type="math/tex">\ x_2</script>对隐含层节点1和2的权重分别为<script type="math/tex">\ w_3=-1, w_4=1</script>，那么：</p>
+<p>隐含层节点1：</p>
+<font color = red><center>$$\ f_1 = sgn(x_1w_1+x_2w_2-\theta)=sgn(1*1+1*(-1)-0.5)=sgn(-0.5)=0$$</center></font>
+隐含层节点2：
+<font color = red><center>$$\ f_2 = sgn(x_1w_3+x_2w_4-\theta)=sgn(1*(-1)+1*1-0.5)=sgn(-0.5)=0$$</center></font>
+输出层节点3：
+<font color = red><center>$$\ y = f_3 = sgn(f_1w_5+f_2w_6-\theta)=sgn(0*1+0*1-0.5)=sgn(-0.5)=0$$</center></font>
+
+<p>所以此时，当<script type="math/tex">\ x_1 = x_2 = 1</script>时，输出<script type="math/tex">\ y = 0</script>，满足异或<br>当<script type="math/tex">\ x_1 = x_2 = 0</script>时，输出<script type="math/tex">\ y = 0</script>，满足异或</p>
+<p>对于<script type="math/tex">\ x_1</script>和<script type="math/tex">\ x_2</script>不相同时，假设<script type="math/tex">\ x_1=1, x_2= 0</script>时<br>隐含层节点1：</p>
+<font color = red><center>$$\ f_1 = sgn(x_1w_1+x_2w_2-\theta)=sgn(1*1+0*(-1)-0.5)=sgn(0.5)=1$$</center></font>
+隐含层节点2：
+<font color = red><center>$$\ f_2 = sgn(x_1w_3+x_2w_4-\theta)=sgn(1*(-1)+0*1-0.5)=sgn(-1.5)=0$$</center></font>
+输出层节点3：
+<font color = red><center>$$\ y = f_3 = sgn(f_1w_5+f_2w_6-\theta)=sgn(1*1+0*0-0.5)=sgn(0.5)=1$$</center></font>
+
+<p>这样当<script type="math/tex">\ x_1</script>和<script type="math/tex">\ x_2</script>不相同时，<script type="math/tex">\ y = 1</script>，就满足异或功能了</p>
+<p><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/多层.png" alt=""></p>
+<p>从上图可知，双隐层的感知机可以解决所有的复杂问题了，但是，问题是它每个神经元节点的权重怎么训练到最佳值？</p>
+<p>这个时候就迎来了ANN低潮期</p>
+<p>而后就有了BP神经网络</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">安河桥北以北</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2020/04/23/DeepLeaning/M-P%E7%A5%9E%E7%BB%8F%E5%85%83and%E6%84%9F%E7%9F%A5%E6%9C%BA/">http://example.com/2020/04/23/DeepLeaning/M-P%E7%A5%9E%E7%BB%8F%E5%85%83and%E6%84%9F%E7%9F%A5%E6%9C%BA/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">Ash's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></div><div class="post_share"><div class="social-share" data-image="/img/robomaster/robomaster10.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/26/DeepLeaning/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><img class="prev-cover" src="/img/robomaster/robomaster11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BP神经网络</div></div></a></div><div class="next-post pull-right"><a href="/2020/04/19/%E8%93%9D%E6%A1%A5%E6%9D%AF/2015%E5%B9%B4%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%81%E8%B5%9B%E9%A2%98/"><img class="next-cover" src="/img/robomaster/robomaster11.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2015年蓝桥杯省赛题</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/02/DeepLeaning/AlexNet/" title="AlexNet"><img class="cover" src="/img/robomaster/robomaster11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="title">AlexNet</div></div></a></div><div><a href="/2020/04/26/DeepLeaning/BP神经网络/" title="BP神经网络"><img class="cover" src="/img/robomaster/robomaster11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-26</div><div class="title">BP神经网络</div></div></a></div><div><a href="/2020/05/10/DeepLeaning/CNN卷积神经网络/" title="CNN卷积神经网络"><img class="cover" src="/img/robomaster/robomaster11.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-10</div><div class="title">CNN卷积神经网络</div></div></a></div><div><a href="/2020/04/16/DeepLeaning/windows10-tensorflow-gpu/" title="windows10+tensorflow-gpu"><img class="cover" src="/img/robomaster/robomaster10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-16</div><div class="title">windows10+tensorflow-gpu</div></div></a></div><div><a href="/2020/05/08/DeepLeaning/激活函数/" title="激活函数"><img class="cover" src="/img/robomaster/robomaster10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-08</div><div class="title">激活函数</div></div></a></div><div><a href="/2020/03/29/python/Numpy科学计算库/" title="Numpy科学计算库"><img class="cover" src="/img/robomaster/robomaster10.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-29</div><div class="title">Numpy科学计算库</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://gitee.com/bao_xian_hong/Album/raw/master/image/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">安河桥北以北</div><div class="author-info__description">努力成为一个有趣的人</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">34</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">26</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">11</div></a></div></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Ash1104" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:7757582@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="/about" target="_blank" title="qq"><i class="fab fa-qq"></i></a><a class="social-icon" href="/about" target="_blank" title="weixin"><i class="fab fa-weixin"></i></a><a class="social-icon" href="https://twitter.com/Tim_qwq" target="_blank" title="twitter"><i class="fab fa-twitter"></i></a><a class="social-icon" href="https://www.facebook.com/chenai" target="_blank" title="facebook"><i class="fab fa-facebook"></i></a><a class="social-icon" href="https://bbs.robomaster.com/home.php?mod=space&amp;uid=36811&amp;do=index&amp;view=admin" target="_blank" title="RoboMaster"><i class="fas fa-robot"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><span>公告</span></div><div class="announcement_content">新时代躺平青年😴</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/27/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Git常用命令"><img src="/img/robomaster/robomaster11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git常用命令"/></a><div class="content"><a class="title" href="/2021/06/27/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/Git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Git常用命令">Git常用命令</a><time datetime="2021-06-27T06:27:48.000Z" title="发表于 2021-06-27 14:27:48">2021-06-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/%E7%94%9F%E6%B4%BB/2021-%E8%AE%B0/" title="2021-记"><img src="/img/robomaster/robomaster10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2021-记"/></a><div class="content"><a class="title" href="/2021/06/09/%E7%94%9F%E6%B4%BB/2021-%E8%AE%B0/" title="2021-记">2021-记</a><time datetime="2021-06-09T02:11:02.000Z" title="发表于 2021-06-09 10:11:02">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/26/robomaster/Filter/" title="Kalman Filter"><img src="/img/robomaster/robomaster11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Kalman Filter"/></a><div class="content"><a class="title" href="/2021/01/26/robomaster/Filter/" title="Kalman Filter">Kalman Filter</a><time datetime="2021-01-25T19:23:25.000Z" title="发表于 2021-01-26 03:23:25">2021-01-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/31/%E7%94%9F%E6%B4%BB/2020%E6%80%BB%E7%BB%93/" title="2020年总结"><img src="/img/robomaster/robomaster10.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2020年总结"/></a><div class="content"><a class="title" href="/2020/12/31/%E7%94%9F%E6%B4%BB/2020%E6%80%BB%E7%BB%93/" title="2020年总结">2020年总结</a><time datetime="2020-12-31T15:20:20.000Z" title="发表于 2020-12-31 23:20:20">2020-12-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/10/14/%E8%93%9D%E6%A1%A5%E6%9D%AF/2014%E5%B9%B4%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%81%E8%B5%9BA%E7%BB%84%E9%A2%98/" title="2014年蓝桥杯省赛A组题"><img src="/img/robomaster/robomaster11.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2014年蓝桥杯省赛A组题"/></a><div class="content"><a class="title" href="/2020/10/14/%E8%93%9D%E6%A1%A5%E6%9D%AF/2014%E5%B9%B4%E8%93%9D%E6%A1%A5%E6%9D%AF%E7%9C%81%E8%B5%9BA%E7%BB%84%E9%A2%98/" title="2014年蓝桥杯省赛A组题">2014年蓝桥杯省赛A组题</a><time datetime="2020-10-14T02:09:10.000Z" title="发表于 2020-10-14 10:09:10">2020-10-14</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By 安河桥北以北</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">🌈Hexo 5.4.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">🌈Butterfly 3.7.8</a></div><a target="_blank" rel="noopener" href="https://console.upyun.com/account/security//"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/又拍云logo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://cloud.tencent.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/logo-bg-color.svg" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://www.aliyun.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/阿里云logo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://tongji.baidu.com/web/welcome/login"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/百度统计logo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://accounts.google.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/ic_analytics.svg" alt=""/></a><span class="footer-separator">Google Analytics |</span><a target="_blank" rel="noopener" href="https://gitee.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/码云logo.svg" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://coding.net/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/codinglogo.png" alt=""/></a><span class="footer-separator">|</span><a target="_blank" rel="noopener" href="https://github.com/"><img src="https://gitee.com/bao_xian_hong/Album/raw/master/image/githublogo.png" alt=""/></a><div class="footer_custom_text">一个新时代躺平青年的博客</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '7WoV0hNly8Wv1UWQxyecO8z7-gzGzoHsz',
+      appKey: 'cj2rXzmTC9dy0QAkIaBfrOXT',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
